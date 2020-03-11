@@ -1,0 +1,22 @@
+<odoo>
+  <data>
+          
+      <record id="pr1_s3_s3_connection_inherit" model="ir.ui.view">
+        <field name="name">pr1_s3.s3_connection_inherit</field>
+        <field name="model">pr1_s3.s3_connection</field>
+        <field name="inherit_id" ref="pr1_s3.view_s3_connection"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='upload_all_existing']" position="attributes">
+                <attribute name="attrs">{'invisible':[('s3_for_inspection','=',True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='bucket_filters']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sub_folder']" position="before">
+                <field name="s3_for_inspection"/>
+            </xpath>
+        </field>
+     </record>
+      
+  </data>
+</odoo>

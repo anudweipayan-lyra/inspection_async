@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates  id="template" xml:space="preserve">
+  
+    
+        <div t-name="FieldBinaryFileUploader.files" class="oe_attachments" aria-atomic="true" style="-webkit-order:2;">
+        <t t-if="widget.mode === 'readonly'">
+            <div class='row' id='many2manyimage' > 
+                <t t-foreach="widget.value.data" t-as="file">
+                    <div class='column' style="inline-block;padding-right:10px;padding-left:10px;padding-bottom:10px !important">
+                        <t t-if="file.data.enable_selection">
+                            <span style="width:250px;padding-right:10px;padding-left:10px;padding-bottom:10px">  <input type="checkbox" class="fa float-right o_select_image"  title="Select this file" aria-label="Select this file" t-att-data-id="file.data.id" /></span>
+                        </t>
+                        <t t-if="file.data.url">
+                            <a class="o_image photos"  target="_blank" 
+                            t-att-href="widget.metadata[file.id] ? file.data.url : false"
+                            t-att-title="file.data.name"
+                            t-att-aria-label="file.data.name"
+                            t-att-data-mimetype="file.data.mimetype"
+                            t-att-data-src="file.data.url" style="background-size: cover;"/>
+                        </t>
+                        
+                        <t t-else="">
+                            <a class="o_image photos"  target="_blank" 
+                            t-att-href="widget.metadata[file.id] ? widget.metadata[file.id].url : false"
+                            t-att-title="file.data.name"
+                            t-att-aria-label="file.data.name"
+                            t-att-data-mimetype="file.data.mimetype"
+                            t-attf-data-src="/web/image/#{file.data.id}/300x240"/>
+                        </t>
+                        
+                    </div>
+                </t>
+            </div> 
+        </t>
+        <t t-else="1">
+            <div class='row' id='many2manyimage' > 
+                <div t-foreach="widget.value.data" t-as="file" class="oe_attachment">
+                    <div class='column' style="inline-block;padding-right:10px;padding-left:10px;padding-bottom:10px !important">
+                        <t t-if="!file.data.upload">
+                            
+                            <div>
+                                <a href="#" class="fa fa-times float-right oe_delete" title="Delete this file" aria-label="Delete this file" t-att-data-id="file.data.id"/>
+                            </div>
+                            <t t-if="file.data.url">
+                                <a class="o_image photos"  target="_blank" 
+                                t-att-href="widget.metadata[file.id] ? file.data.url : false"
+                                t-att-title="file.data.name"
+                                t-att-aria-label="file.data.name"
+                                t-att-data-mimetype="file.data.mimetype"
+                                t-att-data-src="file.data.url" style="background-size: cover;"/>
+                            </t>
+                            
+                            <t t-esle="">
+                                <a class="o_image photos"  target="_blank" 
+                                t-att-href="widget.metadata[file.id] ? widget.metadata[file.id].url : false"
+                                t-att-title="file.data.name"
+                                t-att-aria-label="file.data.name"
+                                t-att-data-mimetype="file.data.mimetype"
+                                t-attf-data-src="/web/image/#{file.data.id}/300x240"/>
+                            </t>
+                            
+                        </t>
+                    </div>
+                </div>
+                    
+                </div>
+            <div t-foreach="widget.uploadingFiles" t-as="file" class="oe_attachment">
+                <div>Uploading...</div>
+                <a t-att-title="file.name" t-att-aria-label="file.name" t-att-name="file.name" class="o_image">
+                    <i class="fa fa-spinner fa-spin fa-5x fa-fw" role="img" aria-label="Loading, please wait..." title="Loading, please wait..."></i>
+                </a>
+                    <div><t t-esc="file.name"/></div>
+            </div>
+        </t>
+    </div>
+ 
+
+    
+    
+</templates>
+
+

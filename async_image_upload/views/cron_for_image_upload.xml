@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="ir_cron_image_upload_guided_inspection" model="ir.cron">
+            <field name="name">Image Upload Guided Inspection</field>
+            <field name="model_id" ref="model_guided_inspection"/>
+            <field name="state">code</field>
+            <field name="code">model.s3_upload_cron()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="priority">20</field>
+        </record>
+        
+         <record id="ir_cron_image_upload_inspection_tool_main" model="ir.cron">
+            <field name="name">Image Upload  Inspection Tool Main</field>
+            <field name="model_id" ref="model_inspection_tool_main"/>
+            <field name="state">code</field>
+            <field name="code">model.s3_upload_inspection_cron()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">2</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="priority">20</field>
+        </record>
+        
+        
+        
+         <record id="pr1_s3_s3_connection_inherit" model="ir.ui.view">
+        <field name="name">pr1_s3.s3_connection_inherit</field>
+        <field name="model">pr1_s3.s3_connection</field>
+        <field name="inherit_id" ref="pr1_s3.view_s3_connection"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='sub_folder']" position="before">
+                <field name="no_of_pics"/>
+            </xpath>
+        </field>
+     </record>
+        
+    </data>
+</openerp>
+
